@@ -61,16 +61,17 @@ const Calculator = () => {
     if (!expression) {
       return;
     }
-    setNumber(eval(expression.replace("X", "*")));
+    const result = eval(expression.replace("X", "*"));
+    setNumber(result);
     setDecimalLength(0);
-    setExpression("");
+    setExpression(result);
   };
 
   return (
     <div
       id="calculator"
       className="grid grid-rows-6 grid-cols-4 bg-slate-900 text-white text-3xl 
-      font-medium p-2 gap-1"
+      font-medium p-2 gap-1 shadow-lg"
     >
       {/* Row 1 */}
       <div className="col-span-full flex flex-col justify-center items-end">
@@ -79,7 +80,9 @@ const Calculator = () => {
         ) : (
           <p id="display">{number}</p>
         )}
-        {expression && <p>{expression}</p>}
+        {expression.length > 0 && (
+          <p className="text-orange-400">{expression}</p>
+        )}
       </div>
 
       {/* Row 2 */}
